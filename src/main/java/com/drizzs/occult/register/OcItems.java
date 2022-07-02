@@ -1,6 +1,7 @@
 package com.drizzs.occult.register;
 
 import com.drizzs.occult.common.item.BaseItem;
+import com.drizzs.occult.common.item.OccultReader;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -18,6 +19,11 @@ public class OcItems {
 
     public static final RegistryObject<Item> MERCURY = ITEMS.register("mercury",
             () -> new BaseItem(Objects.requireNonNull(new Item.Properties()
+                    .tab(OCCULT_GROUP)))
+    );
+
+    public static final RegistryObject<Item> PRESSURE_READER = ITEMS.register("pressure_reader",
+            () -> new OccultReader(Objects.requireNonNull(new Item.Properties().stacksTo(1)
                     .tab(OCCULT_GROUP)))
     );
 

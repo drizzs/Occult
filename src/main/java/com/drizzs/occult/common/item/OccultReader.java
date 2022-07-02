@@ -2,7 +2,6 @@ package com.drizzs.occult.common.item;
 
 import com.drizzs.occult.api.PressureType;
 import com.drizzs.occult.api.capability.PressureCap;
-import com.sun.java.accessibility.util.java.awt.TextComponentTranslator;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -22,9 +21,12 @@ public class OccultReader extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 
         Object2IntMap<PressureType> pressure = PressureCap.getAllPressureFromChunk(level.getChunk((int)player.getX(),(int)player.getY()));
-
-        for(PressureType pt : pressure.keySet()){
-            player.displayClientMessage(Component.translatable(pt.toString() + pressure.getInt(pt)),true);
+        if(!pressure.isEmpty()) {
+            for (PressureType pt : pressure.keySet()) {
+                player.displayClientMessage(Component.translatable(pt.toString() + pressure.getInt(pt)), true);
+            }
+        }else{
+            player.displayClientMessage(Component.translatable("No Pressure Found"), true);
         }
         return super.use(level, player, hand);
     }
