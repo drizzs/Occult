@@ -1,7 +1,9 @@
 {
   "parent": "minecraft:block/template_campfire",
   "textures": {
-    "fire": "minecraft:block/campfire_blue_flame",
-    "lit_log": "minecraft:block/campfire_log_lit"
+    "fire": "occult:blocks/campfire_blue_flame",
+    "lit_log": "occult:blocks/campfire_blue_log_lit",
+    "particle": "occult:blocks/campfire_log",
+    "log": "occult:blocks/campfire_log"
   }
 }

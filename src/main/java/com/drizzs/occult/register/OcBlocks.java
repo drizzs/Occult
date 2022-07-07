@@ -1,5 +1,6 @@
 package com.drizzs.occult.register;
 
+import com.drizzs.occult.common.block.PressureCollectorBlock;
 import com.drizzs.occult.common.block.RitualFireBlock;
 import com.drizzs.occult.common.item.OccultBlockItem;
 import com.google.common.collect.Maps;
@@ -22,7 +23,10 @@ public class OcBlocks {
     public static Map<RegistryObject<Block>, String> blocklist = Maps.newHashMap();
 
     public static final RegistryObject<Block> RITUAL_FIRE = BLOCKS.register("ritual_fire", RitualFireBlock::new);
+    public static final RegistryObject<Block> PRESSURE_COLLECTOR = BLOCKS.register("ritual_fire", PressureCollectorBlock::new);
     public static void register(IEventBus eventBus) {
+
+        blocklist.put(RITUAL_FIRE,"ritual_fire");
 
         for (RegistryObject<Block> block : blocklist.keySet()) {
             ITEMS.register(blocklist.get(block), () -> new OccultBlockItem(block.get(), new Item.Properties().tab(OCCULT_GROUP)));

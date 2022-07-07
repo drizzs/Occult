@@ -7,19 +7,26 @@ import static com.drizzs.occult.register.OcPressure.PRESSURE;
 public class PressureType {
     private final int colour;
 
-    public PressureType(int colour) {
+    private final String id;
+
+    public PressureType(int colour , String name) {
         this.colour = colour;
+        this.id = name;
     }
 
     public int getPressureColour() {
         return colour;
     }
 
-    public PressureType getTypeFromName(String name) {
+    public String getId(){
+        return this.id;
+    }
+
+    public static PressureType getTypeFromName(String name) {
         PressureType pressureType = null;
 
         for(RegistryObject<PressureType> type: PRESSURE.getEntries()) {
-            if (type.getId().toString().equals(name)) {
+            if (type.getId().getPath().equals(name)) {
                 pressureType = type.get();
             }
         }

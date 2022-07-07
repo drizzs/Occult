@@ -1,4 +1,4 @@
-package com.drizzs.occult.common.tile;
+package com.drizzs.occult.common.blockentity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -11,4 +11,6 @@ public class RitualFireBlockEntity extends BlockEntity {
     public RitualFireBlockEntity(BlockPos pos, BlockState state) {
         super(RITUAL_FIRE_BE.get(), pos, state);
     }
+
+
 }

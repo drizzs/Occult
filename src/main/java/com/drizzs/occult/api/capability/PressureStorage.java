@@ -8,7 +8,6 @@ import net.minecraft.nbt.CompoundTag;
 public class PressureStorage implements IPressure {
 
     public Object2IntMap<PressureType> pressures = new Object2IntOpenHashMap<>();
-    public PressureType type;
     public int capacity;
 
     public PressureStorage() {
@@ -70,7 +69,7 @@ public class PressureStorage implements IPressure {
     public CompoundTag serializeNBT() {
         CompoundTag compound = new CompoundTag();
         for (PressureType pressureType : pressures.keySet()) {
-            compound.putInt(pressureType.toString(), getPressureFromType(pressureType));
+            compound.putInt(pressureType.getId(), getPressureFromType(pressureType));
         }
         return compound;
     }
@@ -79,7 +78,7 @@ public class PressureStorage implements IPressure {
     public void deserializeNBT(CompoundTag nbt) {
         for (String pressureType : nbt.getAllKeys()) {
             if(!pressureType.isEmpty()) {
-                pressures.put(type.getTypeFromName(pressureType), nbt.getInt(pressureType));
+                pressures.put(PressureType.getTypeFromName(pressureType), nbt.getInt(pressureType));
             }
         }
     }

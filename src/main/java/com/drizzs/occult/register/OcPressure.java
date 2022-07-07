@@ -19,10 +19,10 @@ public class OcPressure {
 
     public static final Supplier<IForgeRegistry<PressureType>> REGISTRY = PRESSURE.makeRegistry(RegistryBuilder::new);
 
-    public static final RegistryObject<PressureType> INFERNAL = PRESSURE.register("infernal",()->new PressureType(12408320));
-    public static final RegistryObject<PressureType> SPIRITUAL = PRESSURE.register("spiritual",()->new PressureType(14543359));
-    public static final RegistryObject<PressureType> NATURAL = PRESSURE.register("natural",()->new PressureType(16384));
-    public static final RegistryObject<PressureType> UMBRAL = PRESSURE.register("umbral",()->new PressureType(2621512));
+    public static final RegistryObject<PressureType> INFERNAL = PRESSURE.register("infernal",()->new PressureType(12408320,"infernal"));
+    public static final RegistryObject<PressureType> SPIRITUAL = PRESSURE.register("spiritual",()->new PressureType(14543359,"spiritual"));
+    public static final RegistryObject<PressureType> NATURAL = PRESSURE.register("natural",()->new PressureType(16384,"natural"));
+    public static final RegistryObject<PressureType> UMBRAL = PRESSURE.register("umbral",()->new PressureType(2621512,"umbral"));
 
     public static void register(IEventBus eventBus) {
         PRESSURE.register(eventBus);

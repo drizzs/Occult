@@ -58,10 +58,9 @@ public class PressureCap {
         Object2IntMap<PressureType> pressure = new Object2IntOpenHashMap<>();
         getChunkPressure(chunk)
                 .map(chunkPressure -> {
-                    for (PressureType type : chunkPressure.getAllPressure().keySet()) {
-                        pressure.put(type,chunkPressure.getPressureFromType(type));
-                    }
-                    return pressure;
+                    pressure.putAll(chunkPressure.getAllPressure());
+
+                    return chunkPressure.getAllPressure();
                 });
         return pressure;
     }

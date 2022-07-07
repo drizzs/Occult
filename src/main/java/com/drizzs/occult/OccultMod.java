@@ -1,12 +1,11 @@
 package com.drizzs.occult;
 
 import com.drizzs.occult.api.capability.PressureAttach;
-import com.drizzs.occult.register.OcBlockEntities;
-import com.drizzs.occult.register.OcBlocks;
-import com.drizzs.occult.register.OcItems;
-import com.drizzs.occult.register.OcPressure;
+import com.drizzs.occult.register.*;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.chunk.LevelChunk;
@@ -37,6 +36,7 @@ public class OccultMod
         OcItems.register(modEventBus);
         OcPressure.register(modEventBus);
         OcBlockEntities.register(modEventBus);
+        OcTags.createTags();
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -63,9 +63,7 @@ public class OccultMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+            ItemBlockRenderTypes.setRenderLayer(OcBlocks.RITUAL_FIRE.get(), RenderType.cutout());
         }
     }
 }
