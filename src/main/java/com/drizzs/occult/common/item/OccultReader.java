@@ -1,6 +1,6 @@
 package com.drizzs.occult.common.item;
 
-import com.drizzs.occult.api.PressureType;
+import com.drizzs.occult.api.capability.PressureType;
 import com.drizzs.occult.api.capability.PressureCap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.network.chat.Component;

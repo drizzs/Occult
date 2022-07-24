@@ -1,6 +1,5 @@
 package com.drizzs.occult.api.capability;
 
-import com.drizzs.occult.api.PressureType;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -13,5 +12,6 @@ public interface IPressure extends INBTSerializable<CompoundTag> {
     void fill(PressureType pressureType);
     Object2IntMap<PressureType> getAllPressure();
     int getPressureFromType(PressureType pressureType);
+    int getPressureCapacity();
 
 }

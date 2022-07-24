@@ -1,7 +1,7 @@
 package com.drizzs.occult.common.block;
 
 
-import com.drizzs.occult.api.PressureType;
+import com.drizzs.occult.api.capability.PressureType;
 import com.drizzs.occult.api.capability.PressureCap;
 import com.drizzs.occult.common.blockentity.RitualFireBlockEntity;
 import net.minecraft.core.BlockPos;

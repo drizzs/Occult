@@ -1,6 +1,6 @@
 package com.drizzs.occult.common.recipe;
 
-import com.drizzs.occult.api.PressureType;
+import com.drizzs.occult.api.capability.PressureType;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;

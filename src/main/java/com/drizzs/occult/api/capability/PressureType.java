@@ -1,5 +1,6 @@
-package com.drizzs.occult.api;
+package com.drizzs.occult.api.capability;
 
+import com.drizzs.occult.api.gui.interfaces.IAsset;
 import net.minecraftforge.registries.RegistryObject;
 
 import static com.drizzs.occult.register.OcPressure.PRESSURE;
@@ -9,9 +10,14 @@ public class PressureType {
 
     private final String id;
 
-    public PressureType(int colour , String name) {
+    private final IAsset progressBarEmpty;
+    private final IAsset progressBarFull;
+
+    public PressureType(int colour , String name, IAsset progressBarFull, IAsset progressBarEmpty) {
         this.colour = colour;
         this.id = name;
+        this.progressBarEmpty = progressBarEmpty;
+        this.progressBarFull = progressBarFull;
     }
 
     public int getPressureColour() {
@@ -20,6 +26,14 @@ public class PressureType {
 
     public String getId(){
         return this.id;
+    }
+
+    public IAsset getProgressBarEmpty() {
+        return progressBarEmpty;
+    }
+
+    public IAsset getProgressBarFull() {
+        return progressBarFull;
     }
 
     public static PressureType getTypeFromName(String name) {

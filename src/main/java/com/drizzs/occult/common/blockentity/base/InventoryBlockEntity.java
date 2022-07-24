@@ -7,6 +7,8 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -47,6 +49,10 @@ public class InventoryBlockEntity extends BlockEntity {
             }
 
         };
+    }
+
+    private boolean stackInTag(ItemStack stack, TagKey<Item> tag){
+        return stack.is(tag);
     }
 
     @Override

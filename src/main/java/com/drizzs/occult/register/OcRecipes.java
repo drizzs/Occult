@@ -15,7 +15,7 @@ public class OcRecipes {
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MOD_ID);
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, MOD_ID);
 
-    public static final RegistryObject<RecipeSerializer<PressureCrusherRecipe>> CRUSHER_RECIPE = RECIPE_SERIALIZERS.register("crusher",)
+    public static final RegistryObject<RecipeSerializer<PressureCrusherRecipe>> CRUSHER_RECIPE = RECIPE_SERIALIZERS.register("crusher", new PressureCrusherRecipe())
 
 
     public static void register(IEventBus eventBus) {

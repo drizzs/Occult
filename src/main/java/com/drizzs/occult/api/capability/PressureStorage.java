@@ -1,6 +1,5 @@
 package com.drizzs.occult.api.capability;
 
-import com.drizzs.occult.api.PressureType;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import net.minecraft.nbt.CompoundTag;
@@ -42,6 +41,11 @@ public class PressureStorage implements IPressure {
             empty(pressureType);
             return 0;
         }
+    }
+
+    @Override
+    public int getPressureCapacity() {
+        return capacity;
     }
 
     @Override
