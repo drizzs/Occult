@@ -4,9 +4,11 @@ import com.drizzs.occult.api.capability.PressureType;
 import com.drizzs.occult.api.gui.AssetTypes.AssetTypes;
 import com.drizzs.occult.api.gui.DefaultAssetProvider;
 import com.drizzs.occult.api.gui.interfaces.IAsset;
-import com.drizzs.occult.api.gui.interfaces.IAssetProvider;
 import com.drizzs.occult.api.gui.interfaces.IAssetType;
+import com.drizzs.occult.client.assets.PressureBarAsset;
 import org.jetbrains.annotations.Nullable;
+
+import java.awt.*;
 
 public class PressureAssetProvider extends DefaultAssetProvider {
 

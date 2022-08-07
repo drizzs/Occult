@@ -1,6 +1,7 @@
 package com.drizzs.occult.api.capability;
 
 import com.drizzs.occult.api.gui.interfaces.IAsset;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraftforge.registries.RegistryObject;
 
 import static com.drizzs.occult.register.OcPressure.PRESSURE;
@@ -12,12 +13,14 @@ public class PressureType {
 
     private final IAsset progressBarEmpty;
     private final IAsset progressBarFull;
+    private final ParticleOptions collectorParticle;
 
-    public PressureType(int colour , String name, IAsset progressBarFull, IAsset progressBarEmpty) {
+    public PressureType(int colour , String name, IAsset progressBarFull, IAsset progressBarEmpty, ParticleOptions collectorParticle) {
         this.colour = colour;
         this.id = name;
         this.progressBarEmpty = progressBarEmpty;
         this.progressBarFull = progressBarFull;
+        this.collectorParticle = collectorParticle;
     }
 
     public int getPressureColour() {
@@ -45,5 +48,9 @@ public class PressureType {
             }
         }
         return pressureType;
+    }
+
+    public ParticleOptions getCollectorParticle() {
+        return collectorParticle;
     }
 }

@@ -2,8 +2,8 @@ package com.drizzs.occult;
 
 import com.drizzs.occult.api.capability.PressureAttach;
 import com.drizzs.occult.register.*;
+import com.drizzs.occult.util.OcConfig;
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Blocks;
@@ -12,7 +12,9 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -31,12 +33,13 @@ public class OccultMod
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modEventBus.addListener(this::commonSetup);
-
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, OcConfig.GENERAL_SPEC, "occult/general.toml");
         OcBlocks.register(modEventBus);
         OcItems.register(modEventBus);
-        OcPressure.register(modEventBus);
         OcBlockEntities.register(modEventBus);
-        OcTags.createTags();
+        OcContainers.register(modEventBus);
+        OcParticles.register(modEventBus);
+        OcPressure.register(modEventBus);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -64,6 +67,11 @@ public class OccultMod
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             ItemBlockRenderTypes.setRenderLayer(OcBlocks.RITUAL_FIRE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(OcBlocks.PRESSURE_COLLECTOR1.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(OcBlocks.PRESSURE_COLLECTOR2.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(OcBlocks.PRESSURE_COLLECTOR3.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(OcBlocks.PRESSURE_COLLECTOR4.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(OcBlocks.PRESSURE_COLLECTOR5.get(), RenderType.cutout());
         }
     }
 }

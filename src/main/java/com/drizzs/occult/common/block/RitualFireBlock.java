@@ -228,8 +228,9 @@ public class RitualFireBlock extends BaseEntityBlock {
         return p_51292_.rotate(p_51293_.getRotation(p_51292_.getValue(FACING)));
     }
 
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_51305_) {
-        p_51305_.add(LIT, SIGNAL_FIRE, WATERLOGGED, FACING);
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
+        stateBuilder.add(LIT, SIGNAL_FIRE, WATERLOGGED, FACING);
     }
 
     public BlockEntity newBlockEntity(@NotNull BlockPos p_152759_, @NotNull BlockState p_152760_) {

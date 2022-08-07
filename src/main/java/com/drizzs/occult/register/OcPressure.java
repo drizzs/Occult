@@ -1,6 +1,5 @@
 package com.drizzs.occult.register;
 
-import com.drizzs.occult.OccultMod;
 import com.drizzs.occult.api.capability.PressureType;
 import com.drizzs.occult.client.assets.PressureBarAsset;
 import net.minecraft.resources.ResourceLocation;
@@ -14,6 +13,7 @@ import java.awt.*;
 import java.util.function.Supplier;
 
 import static com.drizzs.occult.OccultMod.MODID;
+import static com.drizzs.occult.register.OcParticles.*;
 
 public class OcPressure {
 
@@ -21,14 +21,13 @@ public class OcPressure {
 
     public static final Supplier<IForgeRegistry<PressureType>> REGISTRY = PRESSURE.makeRegistry(RegistryBuilder::new);
 
-    public static final RegistryObject<PressureType> INFERNAL = PRESSURE.register("infernal",()->new PressureType(12408320,"infernal",new PressureBarAsset(new Rectangle(0,0,5,60)),new PressureBarAsset(new Rectangle(20,0,5,60))));
-    public static final RegistryObject<PressureType> SPIRITUAL = PRESSURE.register("spiritual",()->new PressureType(14543359,"spiritual",new PressureBarAsset(new Rectangle(5,0,5,60)),new PressureBarAsset(new Rectangle(25,0,5,60))));
-    public static final RegistryObject<PressureType> NATURAL = PRESSURE.register("natural",()->new PressureType(16384,"natural",new PressureBarAsset(new Rectangle(10,0,5,60)),new PressureBarAsset(new Rectangle(30,0,5,60))));
-    public static final RegistryObject<PressureType> UMBRAL = PRESSURE.register("umbral",()->new PressureType(2621512,"umbral",new PressureBarAsset(new Rectangle(15,0,5,60)),new PressureBarAsset(new Rectangle(35,0,5,60))));
+    public static final RegistryObject<PressureType> INFERNAL = PRESSURE.register("infernal",()->new PressureType(12408320,"infernal",new PressureBarAsset(new Rectangle(10,0,5,60)),new PressureBarAsset(new Rectangle(30,0,5,60)),INFERNAL_COLLECTION_PARTICLE.get()));
+    public static final RegistryObject<PressureType> SPIRITUAL = PRESSURE.register("spiritual",()->new PressureType(14543359,"spiritual",new PressureBarAsset(new Rectangle(15,0,5,60)),new PressureBarAsset(new Rectangle(35,0,5,60)),SPIRITUAL_COLLECTION_PARTICLE.get()));
+    public static final RegistryObject<PressureType> NATURAL = PRESSURE.register("natural",()->new PressureType(16384,"natural",new PressureBarAsset(new Rectangle(5,0,5,60)),new PressureBarAsset(new Rectangle(25,0,5,60)),NATURAL_COLLECTION_PARTICLE.get()));
+    public static final RegistryObject<PressureType> UMBRAL = PRESSURE.register("umbral",()->new PressureType(2621512,"umbral",new PressureBarAsset(new Rectangle(0,0,5,60)),new PressureBarAsset(new Rectangle(20,0,5,60)),UMBRAL_COLLECTION_PARTICLE.get()));
 
     public static void register(IEventBus eventBus) {
         PRESSURE.register(eventBus);
-        OccultMod.LOGGER.info("Pressure Registered");
     }
 
 

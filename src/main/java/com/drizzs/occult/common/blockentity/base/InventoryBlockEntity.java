@@ -120,5 +120,7 @@ public class InventoryBlockEntity extends BlockEntity {
         tag.put("Inventory", this.inventory.serializeNBT());
     }
 
-
+    public int getItemSlots() {
+        return itemSlots;
+    }
 }

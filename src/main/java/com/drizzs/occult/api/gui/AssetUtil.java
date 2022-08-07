@@ -1,6 +1,7 @@
 package com.drizzs.occult.api.gui;
 
 import com.drizzs.occult.api.gui.interfaces.IAsset;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -12,7 +13,7 @@ public class AssetUtil {
     public static void drawAsset(PoseStack stack, Screen screen, IAsset asset, int xPos, int yPos) {
         Point offset = asset.getOffset();
         Rectangle area = asset.getArea();
-        screen.getMinecraft().getTextureManager().bindForSetup(asset.getResourceLocation());
+        RenderSystem.setShaderTexture(0,asset.getResourceLocation());
         screen.blit(stack, xPos + offset.x,
                 yPos + offset.y,
                 area.x,
