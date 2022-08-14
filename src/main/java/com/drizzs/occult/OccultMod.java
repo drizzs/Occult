@@ -6,6 +6,7 @@ import com.drizzs.occult.util.OcConfig;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.chunk.LevelChunk;
@@ -38,8 +39,10 @@ public class OccultMod
         OcItems.register(modEventBus);
         OcBlockEntities.register(modEventBus);
         OcContainers.register(modEventBus);
+        OcFluids.register(modEventBus);
         OcParticles.register(modEventBus);
         OcPressure.register(modEventBus);
+        OcRecipes.register(modEventBus);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -66,12 +69,7 @@ public class OccultMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            ItemBlockRenderTypes.setRenderLayer(OcBlocks.RITUAL_FIRE.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(OcBlocks.PRESSURE_COLLECTOR1.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(OcBlocks.PRESSURE_COLLECTOR2.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(OcBlocks.PRESSURE_COLLECTOR3.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(OcBlocks.PRESSURE_COLLECTOR4.get(), RenderType.cutout());
-            ItemBlockRenderTypes.setRenderLayer(OcBlocks.PRESSURE_COLLECTOR5.get(), RenderType.cutout());
+
         }
     }
 }

@@ -1,36 +1,49 @@
 package com.drizzs.occult.common.blockentity.base;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.extensions.IForgeRecipeSerializer;
 
-public abstract class BaseMachineEntity<T extends IForgeRecipeSerializer<?>> extends InventoryBlockEntity{
+public abstract class BaseMachineEntity extends InventoryBlockEntity{
 
-    private final T recipe;
     protected boolean isActive;
     protected int progress;
 
-    public BaseMachineEntity(BlockEntityType<?> type, int slotSize,T recipe,BlockPos pos, BlockState state) {
+    public BaseMachineEntity(BlockEntityType<?> type, int slotSize,BlockPos pos, BlockState state) {
         super(type, slotSize, pos, state);
         setIsActive();
-        setProgress();
-        this.recipe = recipe;
+        progress = 0;
     }
 
     public void setIsActive(){
-        isActive = false;
+        isActive = true;
     }
 
-    public void setProgress(){
+    public int getProgress() {
+        return progress;
+    }
+
+    public void resetProgress() {
+        progress = 0;
+    }
+
+    public void addProgress() {
         ++progress;
+    }
+
+    public boolean isActive() {
+        return isActive;
     }
 
     @Override
     public void tick() {
         if(isActive){
-            ++progress;
-        }else if ()
+            addProgress();
+        }else{
+            progress = Math.max(--progress,0);
+        }
 
         super.tick();
     }

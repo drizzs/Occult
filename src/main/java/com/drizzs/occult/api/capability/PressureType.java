@@ -14,13 +14,14 @@ public class PressureType {
     private final IAsset progressBarEmpty;
     private final IAsset progressBarFull;
     private final ParticleOptions collectorParticle;
-
-    public PressureType(int colour , String name, IAsset progressBarFull, IAsset progressBarEmpty, ParticleOptions collectorParticle) {
+    private final ParticleOptions releaseParticle;
+    public PressureType(int colour , String name, IAsset progressBarFull, IAsset progressBarEmpty, ParticleOptions collectorParticle, ParticleOptions releaseParticle) {
         this.colour = colour;
         this.id = name;
         this.progressBarEmpty = progressBarEmpty;
         this.progressBarFull = progressBarFull;
         this.collectorParticle = collectorParticle;
+        this.releaseParticle = releaseParticle;
     }
 
     public int getPressureColour() {
@@ -52,5 +53,9 @@ public class PressureType {
 
     public ParticleOptions getCollectorParticle() {
         return collectorParticle;
+    }
+
+    public ParticleOptions getReleaseParticle() {
+        return releaseParticle;
     }
 }

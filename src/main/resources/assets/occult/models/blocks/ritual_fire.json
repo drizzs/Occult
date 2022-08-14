@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/template_campfire",
+  "render_type": "cutout",
   "textures": {
     "fire": "occult:blocks/campfire_blue_flame",
     "lit_log": "occult:blocks/campfire_blue_log_lit",

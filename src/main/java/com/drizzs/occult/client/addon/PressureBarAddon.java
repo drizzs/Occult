@@ -6,7 +6,7 @@ import com.drizzs.occult.api.gui.AssetUtil;
 import com.drizzs.occult.api.gui.SimpleAddon;
 import com.drizzs.occult.api.gui.interfaces.IAsset;
 import com.drizzs.occult.api.gui.interfaces.IAssetProvider;
-import com.drizzs.occult.common.container.CrusherContainer;
+import com.drizzs.occult.common.container.base.BaseContainer;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
@@ -56,7 +56,7 @@ public class PressureBarAddon extends SimpleAddon {
         Point offset = foreground.getOffset();
         Rectangle area = foreground.getArea();
         AbstractContainerMenu menu = ((AbstractContainerScreen<?>) screen).getMenu();
-        if (menu instanceof CrusherContainer cc) {
+        if (menu instanceof BaseContainer cc) {
             IPressure pressure = cc.getPressure();
             if (pressure != null) {
                 int stored = pressure.getPressureFromType(PressureType.getTypeFromName(type));

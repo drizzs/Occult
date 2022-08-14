@@ -123,4 +123,22 @@ public class InventoryBlockEntity extends BlockEntity {
     public int getItemSlots() {
         return itemSlots;
     }
+
+    public ItemStack getItemInSlot(int slot) {
+        return handler.map(inventory -> inventory.getStackInSlot(slot)).orElse(ItemStack.EMPTY);
+    }
+
+    public ItemStack insertItem(int slot, ItemStack stack) {
+        ItemStack itemIn = stack.copy();
+        stack.shrink(itemIn.getCount());
+        requiresUpdate = true;
+        return handler.map(inventory -> inventory.insertItem(slot, itemIn, false)).orElse(ItemStack.EMPTY);
+    }
+
+    public ItemStack extractItem(int slot) {
+        int count = getItemInSlot(slot).getCount();
+        requiresUpdate = true;
+        return handler.map(inventory -> inventory.extractItem(slot, count, false)).orElse(ItemStack.EMPTY);
+    }
+
 }

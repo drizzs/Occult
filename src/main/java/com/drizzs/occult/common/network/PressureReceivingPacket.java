@@ -2,7 +2,7 @@ package com.drizzs.occult.common.network;
 
 import com.drizzs.occult.api.capability.IPressure;
 import com.drizzs.occult.api.capability.PressureStorage;
-import com.drizzs.occult.common.container.CrusherContainer;
+import com.drizzs.occult.common.container.base.BaseContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
@@ -33,7 +33,7 @@ public class PressureReceivingPacket {
             ctx.get().enqueueWork(() -> {
                 Player player = Minecraft.getInstance().player;
 
-                if(player.containerMenu instanceof CrusherContainer fc){
+                if(player.containerMenu instanceof BaseContainer fc){
                     fc.setPressure(pressure);
                 }
             });
