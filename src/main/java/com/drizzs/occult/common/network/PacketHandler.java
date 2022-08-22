@@ -23,10 +23,13 @@ public class PacketHandler {
         int index = 0;
         INSTANCE.messageBuilder(PressureGatheringPacket.class, index++, NetworkDirection.PLAY_TO_SERVER)
                 .encoder(PressureGatheringPacket::encode).decoder(PressureGatheringPacket::new)
-                .consumer(PressureGatheringPacket::handle).add();
+                .consumerMainThread(PressureGatheringPacket::handle).add();
         INSTANCE.messageBuilder(PressureReceivingPacket.class, index++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(PressureReceivingPacket::encode).decoder(PressureReceivingPacket::new)
-                .consumer(PressureReceivingPacket::handle).add();
+                .consumerMainThread(PressureReceivingPacket::handle).add();
+        INSTANCE.messageBuilder(CrucibleClientSyncPacket.class, index++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(CrucibleClientSyncPacket::encode).decoder(CrucibleClientSyncPacket::new)
+                .consumerMainThread(CrucibleClientSyncPacket::handle).add();
         OccultMod.LOGGER.info("Registered {} packets for mod '{}'", index, MODID);
     }
 

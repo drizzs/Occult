@@ -15,11 +15,11 @@ public class OcRecipes {
 
     public static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, MODID);
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, MODID);
-    public static final RegistryObject<RecipeSerializer<CrucibleCookingRecipe>> CRUCIBLE_COOKING_SERIALIZER = RECIPE_SERIALIZERS.register("crucible_cooking_serializer", CrucibleCookingSerializer::new);
-    public static final RegistryObject<RecipeSerializer<CrucibleMeltingRecipe>> CRUCIBLE_MELTING_SERIALIZER = RECIPE_SERIALIZERS.register("crucible_melting_serializer", CrucibleMeltingSerializer::new);
-    public static final RegistryObject<RecipeSerializer<CrucibleMixingRecipe>> CRUCIBLE_MIXING_SERIALIZER = RECIPE_SERIALIZERS.register("crucible_mixing_serializer", CrucibleMixingSerializer::new);
-    public static final RegistryObject<RecipeSerializer<CrucibleDippingRecipe>> CRUCIBLE_DIPPING_SERIALIZER = RECIPE_SERIALIZERS.register("crucible_dipping_serializer", CrucibleDippingSerializer::new);
-    public static final RegistryObject<RecipeSerializer<CrucibleCoolingRecipe>> CRUCIBLE_COOLING_SERIALIZER = RECIPE_SERIALIZERS.register("crucible_cooling_serializer", CrucibleCoolingSerializer::new);
+    public static final RegistryObject<RecipeSerializer<CrucibleCookingRecipe>> CRUCIBLE_COOKING_SERIALIZER = RECIPE_SERIALIZERS.register("crucible_cooking", CrucibleCookingSerializer::new);
+    public static final RegistryObject<RecipeSerializer<CrucibleMeltingRecipe>> CRUCIBLE_MELTING_SERIALIZER = RECIPE_SERIALIZERS.register("crucible_melting", CrucibleMeltingSerializer::new);
+    public static final RegistryObject<RecipeSerializer<CrucibleMixingRecipe>> CRUCIBLE_MIXING_SERIALIZER = RECIPE_SERIALIZERS.register("crucible_mixing", CrucibleMixingSerializer::new);
+    public static final RegistryObject<RecipeSerializer<CrucibleDippingRecipe>> CRUCIBLE_DIPPING_SERIALIZER = RECIPE_SERIALIZERS.register("crucible_dipping", CrucibleDippingSerializer::new);
+    public static final RegistryObject<RecipeSerializer<CrucibleCoolingRecipe>> CRUCIBLE_COOLING_SERIALIZER = RECIPE_SERIALIZERS.register("crucible_cooling", CrucibleCoolingSerializer::new);
 
     public static final RegistryObject<RecipeType<CrucibleCookingRecipe>> CRUCIBLE_COOKING = RECIPE_TYPES.register("crucible_cooking",()->new RecipeType<>(){});
     public static final RegistryObject<RecipeType<CrucibleMeltingRecipe>> CRUCIBLE_MELTING =  RECIPE_TYPES.register("crucible_melting",()->new RecipeType<>(){});

@@ -13,7 +13,7 @@
   "amountOut": 50,
   "pressureReleased": [
     {
-      "pressureType": "occult:natural",
+      "pressureType": "natural",
       "amount": 20
     }
   ],

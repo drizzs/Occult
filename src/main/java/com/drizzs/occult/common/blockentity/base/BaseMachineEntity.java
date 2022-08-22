@@ -1,10 +1,12 @@
 package com.drizzs.occult.common.blockentity.base;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.extensions.IForgeRecipeSerializer;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class BaseMachineEntity extends InventoryBlockEntity{
 
@@ -37,14 +39,4 @@ public abstract class BaseMachineEntity extends InventoryBlockEntity{
         return isActive;
     }
 
-    @Override
-    public void tick() {
-        if(isActive){
-            addProgress();
-        }else{
-            progress = Math.max(--progress,0);
-        }
-
-        super.tick();
-    }
 }

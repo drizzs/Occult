@@ -4,8 +4,7 @@ import com.drizzs.occult.api.capability.PressureType;
 import com.drizzs.occult.common.blockentity.base.BaseMachineEntity;
 import com.drizzs.occult.common.recipe.crucible.*;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -15,15 +14,13 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
-import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.drizzs.occult.OccultMod.MODID;
 import static com.drizzs.occult.api.capability.PressureCap.addChunkPressure;
 import static com.drizzs.occult.register.OcBlockEntities.CRUCIBLE_BE;
-import static com.drizzs.occult.register.OcPressure.PRESSURE;
 import static com.drizzs.occult.register.OcRecipes.*;
 import static com.drizzs.occult.register.OcTags.*;
 
@@ -47,7 +44,10 @@ public class CrucibleBE extends BaseMachineEntity {
 
     @Override
     public void tick() {
-        super.tick();
+        if (this.requiresUpdate && this.level != null) {
+            updateEntity();
+            this.requiresUpdate = false;
+        }
         if (isHot()) {
             matchRecipe();
             if (getCurrentRecipe() != null) {
@@ -71,7 +71,7 @@ public class CrucibleBE extends BaseMachineEntity {
             } else {
                 resetProgress();
             }
-        } else if (!getFluidStack().isEmpty()) {
+        } else if (!getFluidStack().isEmpty() && !isHot()) {
             matchCoolingRecipe();
             if (getCurrentRecipe() != null) {
                 if (getMachineType() == 5) {
@@ -86,32 +86,14 @@ public class CrucibleBE extends BaseMachineEntity {
         }
     }
 
-    private void releaseItemStackIntoPressure(ItemStack stack){
-        int addPressure = 0;
-        PressureType type = null;
-        for(RegistryObject<PressureType> p : PRESSURE.getEntries()){
-            PressureType potentialType = p.get();
-            for(int x = 0; x < 100; ++x){
-                if(stack.is(ItemTags.create(new ResourceLocation(MODID,potentialType.getId() + "_" + x)))){
-                    type = potentialType;
-                    addPressure = x;
-                    break;
-                }
-            }
-        }
-        if(type != null) {
-            assert level != null;
-            addChunkPressure(level.getChunkAt(getBlockPos()), type, addPressure);
-            level.addParticle(type.getReleaseParticle(),0.5D,0.5D,0.5D,0,0,0);
-        }
-    }
-
     public LazyOptional<IFluidHandler> getFluidHandler() {
         return fluidHandler;
     }
 
     public FluidStack getFluidStack() {
-        return getFluidHandler().map(fluid -> fluid.getFluidInTank(0)).orElse(FluidStack.EMPTY);
+        return getFluidHandler().map(fluid ->
+                fluid.getFluidInTank(0)
+        ).orElse(FluidStack.EMPTY);
     }
 
     public void setFluidStack(FluidStack stack) {
@@ -143,7 +125,7 @@ public class CrucibleBE extends BaseMachineEntity {
             currentRecipe = level.getRecipeManager()
                     .getRecipes()
                     .stream()
-                    .filter(recipe -> recipe instanceof AbstractCrucibleRecipe)
+                    .filter(recipe -> recipe instanceof AbstractCrucibleRecipe && !recipe.getType().equals(CRUCIBLE_COOLING.get()))
                     .map(recipe -> (AbstractCrucibleRecipe) recipe)
                     .filter(recipe -> matchRecipe(recipe, getItemList(), getFluidStack()))
                     .findFirst()
@@ -218,6 +200,7 @@ public class CrucibleBE extends BaseMachineEntity {
                 addFluidToTank(getMeltingRecipe().getFluidOut());
                 addPressureFromRecipe();
                 resetProgress();
+                this.requiresUpdate = true;
             }
         } else {
             addProgress();
@@ -231,6 +214,7 @@ public class CrucibleBE extends BaseMachineEntity {
                 insertItem(3,getCookingRecipe().getItemOut().copy());
                 addPressureFromRecipe();
                 resetProgress();
+                this.requiresUpdate = true;
             }
         }else {
             addProgress();
@@ -244,6 +228,7 @@ public class CrucibleBE extends BaseMachineEntity {
                 insertItem(3,getDippingRecipe().getItemOut().copy());
                 addPressureFromRecipe();
                 resetProgress();
+                this.requiresUpdate = true;
             }
         }else {
             addProgress();
@@ -257,6 +242,7 @@ public class CrucibleBE extends BaseMachineEntity {
                 setFluidStack(getMixingRecipe().getFluidOut());
                 addPressureFromRecipe();
                 resetProgress();
+                this.requiresUpdate = true;
             }
         }else {
             addProgress();
@@ -266,9 +252,10 @@ public class CrucibleBE extends BaseMachineEntity {
     private void coolMyItems(){
         if (getCurrentRecipe() != null && getProgress() >= getCoolingRecipe().getCookTime()) {
             if (wasFluidRemoved(getCoolingRecipe().getFluidIn())) {
-                insertItem(3,getCoolingRecipe().getItemOut().copy());
+                insertItem(6,getCoolingRecipe().getItemOut().copy());
                 addPressureFromRecipe();
                 resetProgress();
+                this.requiresUpdate = true;
             }
         }else {
             addProgress();
@@ -278,7 +265,7 @@ public class CrucibleBE extends BaseMachineEntity {
     public InteractionResult insertExtractItem(Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         if (!stack.isEmpty() && !player.isCrouching()) {
-            for (int x = 0; x < 3; ++x) {
+            for (int x = 0; x < 5; ++x) {
                 ItemStack targetSlot = getItemInSlot(x);
                 if (targetSlot.isEmpty()) {
                     insertItem(x, stack);
@@ -346,15 +333,16 @@ public class CrucibleBE extends BaseMachineEntity {
         for (PressureType type : currentRecipe.getPressureCreated().keySet()) {
             assert level != null;
             if (!level.isClientSide()) {
-                addChunkPressure(level.getChunkAt(getBlockPos()), type, currentRecipe.getPressureCreated().get(type));
+                addChunkPressure(level.getChunkAt(getBlockPos()), type, currentRecipe.getPressureCreated().getInt(type));
             }
         }
     }
 
     private int getTempFromBelow() {
         if (level != null) {
-            BlockState belowState = level.getBlockState(getBlockPos().below());
-            if (belowState.is(LOW_HEAT)) {
+            BlockPos pos = getBlockPos().below();
+            BlockState belowState = level.getBlockState(pos);
+            if (belowState.is(LOW_HEAT) || belowState.getBlock().isBurning(belowState,level,pos)) {
                 return 250;
             } else if (belowState.is(MEDIUM_HEAT)) {
                 return 650;
@@ -369,4 +357,22 @@ public class CrucibleBE extends BaseMachineEntity {
         return 0;
     }
 
+    @Override
+    public CompoundTag serializeNBT() {
+        CompoundTag tag = super.serializeNBT();
+        saveAdditional(tag);
+        return tag;
+    }
+
+    @Override
+    public void load(@NotNull CompoundTag tag) {
+        super.load(tag);
+        tank.readFromNBT(tag);
+    }
+
+    @Override
+    protected void saveAdditional(@NotNull CompoundTag tag) {
+        tank.writeToNBT(tag);
+        super.saveAdditional(tag);
+    }
 }

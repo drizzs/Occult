@@ -17,7 +17,12 @@ public class OcItems {
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
-    public static final RegistryObject<Item> MERCURY = ITEMS.register("mercury",
+    public static final RegistryObject<Item> MERCURY = ITEMS.register("quicksilver",
+            () -> new BaseItem(Objects.requireNonNull(new Item.Properties()
+                    .tab(OCCULT_GROUP)))
+    );
+
+    public static final RegistryObject<Item> SULPHUR = ITEMS.register("sulphur",
             () -> new BaseItem(Objects.requireNonNull(new Item.Properties()
                     .tab(OCCULT_GROUP)))
     );

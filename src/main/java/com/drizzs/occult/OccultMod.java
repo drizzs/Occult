@@ -1,6 +1,7 @@
 package com.drizzs.occult;
 
 import com.drizzs.occult.api.capability.PressureAttach;
+import com.drizzs.occult.common.network.PacketHandler;
 import com.drizzs.occult.register.*;
 import com.drizzs.occult.util.OcConfig;
 import com.mojang.logging.LogUtils;

@@ -52,19 +52,31 @@ public class CrucibleBERenderer implements BlockEntityRenderer<CrucibleBE> {
             c = 0.25F;
             d = 0.75F;
         }
-        if (tile.getItemList().size() == 1) {
+        int size = tile.getItemList().size();
+        if (size == 1) {
             renderItem(tile.getItemList().get(0), tile,.5F, 1.8F, .5F, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
-        } else if (tile.getItemList().size() == 2) {
+        } else if (size == 2) {
             renderItem(tile.getItemList().get(0), tile,a, 1.8F, c, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
             renderItem(tile.getItemList().get(1), tile,b, 1.8F, d, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
-        } else if (tile.getItemList().size() == 3) {
+        } else if (size == 3) {
             renderItem(tile.getItemList().get(0), tile,.5F, 1.8F, .5F, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
             renderItem(tile.getItemList().get(1), tile,a, 1.7F, c, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
             renderItem(tile.getItemList().get(2), tile,b, 1.7F, d, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
+        } else if (size == 4) {
+            renderItem(tile.getItemList().get(0), tile,.5F, 1.8F, .5F, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
+            renderItem(tile.getItemList().get(1), tile,a, 1.7F, c, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
+            renderItem(tile.getItemList().get(2), tile,b, 1.7F, d, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
+            renderItem(tile.getItemList().get(3), tile,b, 1.7F, d, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
+        } else if (size == 5) {
+            renderItem(tile.getItemList().get(0), tile,.5F, 1.8F, .5F, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
+            renderItem(tile.getItemList().get(1), tile,a, 1.7F, c, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
+            renderItem(tile.getItemList().get(2), tile,b, 1.7F, d, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
+            renderItem(tile.getItemList().get(3), tile,b, 1.7F, d, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
+            renderItem(tile.getItemList().get(4), tile,b, 1.7F, d, 0.3F, matrix, combinedLightIn, combinedOverlayIn, bufferIn);
         }
 
-        if(!tile.getItemInSlot(3).isEmpty()){
-            renderItem(tile.getItemInSlot(3),tile,.5F, 1.45F, .5F,0.3F,matrix,combinedLightIn,combinedOverlayIn,bufferIn);
+        if(!tile.getItemInSlot(5).isEmpty()){
+            renderItem(tile.getItemInSlot(5),tile,.5F, 1.45F, .5F,0.3F,matrix,combinedLightIn,combinedOverlayIn,bufferIn);
         }
     }
 

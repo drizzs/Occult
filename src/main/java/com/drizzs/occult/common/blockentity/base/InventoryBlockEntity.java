@@ -19,12 +19,12 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
-public class InventoryBlockEntity extends BlockEntity {
+    public class InventoryBlockEntity extends BlockEntity {
 
     protected final int itemSlots;
     protected boolean requiresUpdate = false;
 
-    public final ItemStackHandler inventory;
+    public ItemStackHandler inventory;
     protected LazyOptional<ItemStackHandler> handler;
 
     public InventoryBlockEntity(BlockEntityType<?> type, int slotSize, BlockPos pos, BlockState state) {
@@ -93,7 +93,13 @@ public class InventoryBlockEntity extends BlockEntity {
         this.inventory.deserializeNBT(tag.getCompound("Inventory"));
     }
 
-    @Override
+        @Override
+        public CompoundTag serializeNBT() {
+
+            return super.serializeNBT();
+        }
+
+        @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
         super.onDataPacket(net, pkt);
         handleUpdateTag(pkt.getTag());

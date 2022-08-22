@@ -73,7 +73,8 @@ public class PressureStorage implements IPressure {
     public CompoundTag serializeNBT() {
         CompoundTag compound = new CompoundTag();
         for (PressureType pressureType : pressures.keySet()) {
-            compound.putInt(pressureType.getId(), getPressureFromType(pressureType));
+            if(pressureType != null)
+                compound.putInt(pressureType.getId(), getPressureFromType(pressureType));
         }
         return compound;
     }

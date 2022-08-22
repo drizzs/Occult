@@ -19,40 +19,40 @@ import net.minecraftforge.fluids.ForgeFlowingFluid;
 import static com.drizzs.occult.OccultMod.MODID;
 import static com.drizzs.occult.common.OccultGroup.OCCULT_GROUP;
 
-public class Quicksilver {
+public class Amalgam {
 
-    public static final ResourceLocation MERCURY_STILL_TEXTURE = new ResourceLocation(MODID,"blocks/fluids/quicksilver_still");
-    public static final ResourceLocation MERCURY_FLOWING_TEXTURE = new ResourceLocation(MODID,"blocks/fluids/quicksilver_flowing");
+    public static final ResourceLocation AMALGAM_STILL_TEXTURE = new ResourceLocation(MODID,"blocks/fluids/amalgam_still");
+    public static final ResourceLocation AMALGAM_FLOWING_TEXTURE = new ResourceLocation(MODID,"blocks/fluids/amalgam_flowing");
 
     public static Block.Properties stdProp = Block.Properties.of(Material.WATER).noCollission().strength(100.0F).noLootTable();
 
-    public static FlowingFluid MERCURY;
-    public static FlowingFluid FLOWING_MERCURY;
-    public static OcFlowingFluidBlock MERCURY_BLOCK;
-    public static Item MERCURY_BUCKET;
+    public static FlowingFluid AMALGAM;
+    public static FlowingFluid FLOWING_AMALGAM;
+    public static OcFlowingFluidBlock AMALGAM_BLOCK;
+    public static Item AMALGAM_BUCKET;
 
     public static FlowingFluid QuicksilverFluid(){
-        MERCURY = new ForgeFlowingFluid.Source(properties);
-        return MERCURY;
+        AMALGAM = new ForgeFlowingFluid.Source(properties);
+        return AMALGAM;
     }
 
     public static FlowingFluid FlowingQuicksilverFluid(){
-        FLOWING_MERCURY = new ForgeFlowingFluid.Flowing(properties);
-        return FLOWING_MERCURY;
+        FLOWING_AMALGAM = new ForgeFlowingFluid.Flowing(properties);
+        return FLOWING_AMALGAM;
     }
 
     public static OcFlowingFluidBlock FlowingQuicksilverBlock(){
-        MERCURY_BLOCK = new OcFlowingFluidBlock(() -> MERCURY, stdProp);
-        return MERCURY_BLOCK;
+        AMALGAM_BLOCK = new OcFlowingFluidBlock(() -> AMALGAM, stdProp);
+        return AMALGAM_BLOCK;
     }
 
     public static Item QuicksilverBucket(){
-        MERCURY_BUCKET = new BucketItem(() -> MERCURY, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).tab(OCCULT_GROUP));
-        return MERCURY_BUCKET;
+        AMALGAM_BUCKET = new BucketItem(() -> AMALGAM, new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1).tab(OCCULT_GROUP));
+        return AMALGAM_BUCKET;
     }
 
 
-    public static final FluidType MERCURY_FLUID_TYPE = new OcFluid(FluidType.Properties.create()
+    public static final FluidType AMALGAM_FLUID_TYPE = new OcFluid(FluidType.Properties.create()
             .adjacentPathType(BlockPathTypes.WATER)
             .canConvertToSource(false)
             .canDrown(true)
@@ -70,11 +70,11 @@ public class Quicksilver {
             .rarity(Rarity.RARE)
             .supportsBoating(false)
             .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY),
-            MERCURY_STILL_TEXTURE,
-            MERCURY_FLOWING_TEXTURE
+            AMALGAM_STILL_TEXTURE,
+            AMALGAM_FLOWING_TEXTURE
     );
 
-    public static final ForgeFlowingFluid.Properties properties = new ForgeFlowingFluid.Properties(() -> MERCURY_FLUID_TYPE, () -> MERCURY, () -> FLOWING_MERCURY)
-            .block(() -> MERCURY_BLOCK).bucket(() -> MERCURY_BUCKET);
+    public static final ForgeFlowingFluid.Properties properties = new ForgeFlowingFluid.Properties(() -> AMALGAM_FLUID_TYPE, () -> AMALGAM, () -> FLOWING_AMALGAM)
+            .block(() -> AMALGAM_BLOCK).bucket(() -> AMALGAM_BUCKET);
 
 }

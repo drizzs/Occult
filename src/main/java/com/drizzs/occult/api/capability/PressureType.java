@@ -46,6 +46,7 @@ public class PressureType {
         for(RegistryObject<PressureType> type: PRESSURE.getEntries()) {
             if (type.getId().getPath().equals(name)) {
                 pressureType = type.get();
+                break;
             }
         }
         return pressureType;

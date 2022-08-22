@@ -35,7 +35,7 @@ public class OcBlocks {
 
         BLOCKS.register(eventBus);
 
-        //blocklist.put(RITUAL_FIRE,"ritual_fire");
+        blocklist.put(RITUAL_FIRE,"ritual_fire");
         blocklist.put(CRUCIBLE,"crucible");
         //blocklist.put(CRUSHER,"crusher");
         //blocklist.put(PRESSURE_COLLECTOR1,"pressure_collector1");

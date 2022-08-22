@@ -15,7 +15,7 @@
   },
   "pressureReleased": [
     {
-      "pressureType": "occult:infernal",
+      "pressureType": "infernal",
       "amount": 2
     }
   ],
